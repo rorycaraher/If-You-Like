@@ -38,5 +38,5 @@ class IfYouLike:
         return add_tracks
 
 
-fugazi = IfYouLike()
-print(fugazi.create_playlist('fugazi'))
+ifyoulike = IfYouLike
+print(ifyoulike.create_playlist(sys.argv[1]))
