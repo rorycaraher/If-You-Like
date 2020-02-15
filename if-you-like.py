@@ -38,5 +38,5 @@ class IfYouLike:
         return add_tracks
 
 
-ifyoulike = IfYouLike
+ifyoulike = IfYouLike()
 print(ifyoulike.create_playlist(sys.argv[1]))
