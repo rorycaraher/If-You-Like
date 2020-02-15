@@ -19,6 +19,6 @@ json_results = json.dumps(results)
 print("================ " + search_term + " ================")
 
 for album in results['albums']['items']:
-    print (album['name'])
+    print (album['name']+ ' - ' + album['uri'])
 
 # print(json.dumps(albums))

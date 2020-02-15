@@ -2,11 +2,12 @@ import sys
 import json
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+import secrets
 
 # user = 
 search_term = sys.argv[1]
 
-client_credentials_manager = SpotifyClientCredentials(client_id='38ef923dcdc2419fb479849877c46c73', client_secret='05ce1147630843bcb1055f9cced752c5')
+client_credentials_manager = SpotifyClientCredentials(secrets.client_id, secrets.client_secret)
 
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
