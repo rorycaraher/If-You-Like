@@ -18,25 +18,32 @@ class IfYouLike:
         artist_id = results['artists']['items'][0]['id']
         return  self.sp.artist_related_artists(artist_id)
 
+    # this will fail if artist only has EPs
     def get_album_tracks(self, search_term):
         artists = self.get_related_artists(search_term)['artists']
         tracks = []
         for artist in artists:            
             result = self.sp.artist_albums(artist['uri'], album_type='album')
             album = result['items'][0]
-            tracks.append(self.sp.album_tracks(album['id']))
-        return tracks[0]['items']
+            album_tracks = self.sp.album_tracks(album['id'])
+            print(json.dump(album_tracks))
+            # for track in album_tracks:
+            #     print(track)
+
+        return tracks
 
     def create_playlist(self, search_term):
         tracks = self.get_album_tracks(search_term)
         track_ids = []
         for track in tracks:
-            track_ids.append(track['id'])
-        playlist_title = 'If You Like ' + search_term
-        playlist = self.sp.user_playlist_create(secrets.user_id, playlist_title, public=True)
-        add_tracks = self.sp.user_playlist_add_tracks(secrets.username, playlist['id'], track_ids)
-        return add_tracks
+            print(track['total'])
+        #     track_ids.append(track['id'])
+        # playlist_title = 'If You Like ' + search_term
+        # playlist = self.sp.user_playlist_create(secrets.user_id, playlist_title, public=True)
+        # add_tracks = self.sp.user_playlist_add_tracks(secrets.username, playlist['id'], track_ids)
+        # return add_tracks
 
 
 ifyoulike = IfYouLike()
-print(ifyoulike.create_playlist(sys.argv[1]))
+# print(ifyoulike.create_playlist(sys.argv[1]))
+print(ifyoulike.get_album_tracks(sys.argv[1]))
