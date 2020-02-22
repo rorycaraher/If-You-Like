@@ -46,4 +46,5 @@ class IfYouLike:
 
 ifyoulike = IfYouLike()
 # print(ifyoulike.create_playlist(sys.argv[1]))
-print(ifyoulike.get_album_tracks(sys.argv[1]))
+# print(ifyoulike.get_album_tracks(sys.argv[1]))
+print(ifyoulike.get_related_artists(sys.argv[1]))
