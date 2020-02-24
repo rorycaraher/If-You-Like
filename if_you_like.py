@@ -14,6 +14,7 @@ class IfYouLike:
         self.sp = spotipy.Spotify(auth=self.token)
 
     def get_related_artists(self, search_term):
+        # TODO: get the search term from the search results, not just the input string 
         results = self.sp.search(q=search_term,type='artist', limit=1)
         artist_id = results['artists']['items'][0]['id']
         return  self.sp.artist_related_artists(artist_id)

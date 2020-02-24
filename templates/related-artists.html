@@ -6,7 +6,9 @@
 <ul>
     {% for artist in artists %}
         <li>
-            {{ artist.name }}
+            <a href="{{ artist.external_urls.spotify }}" target="_blank">
+                {{ artist.name }}
+            </a>
         </li>
     {% endfor %}
 </ul>
