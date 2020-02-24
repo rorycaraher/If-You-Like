@@ -1,17 +1,22 @@
 import os
 from flask import Flask, render_template, request
+from config import Config
 from if_you_like import IfYouLike
+from forms import ArtistSearchForm
 
 app = Flask(__name__)
+app.config.from_object(Config)
 ifyoulike = IfYouLike()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    form = ArtistSearchForm()
+    return render_template('index.html', form=form)
     
-@app.route('/related-artists')
+@app.route('/related-artists', methods=['GET', 'POST'])
 def related_artists():
-    results = ifyoulike.get_related_artists("grandaddy")
+    search_term = request.form['search_term']
+    results = ifyoulike.get_related_artists(search_term)
     return render_template('related-artists.html', results = results)
 
 if __name__ == "__main__":

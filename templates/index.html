@@ -2,8 +2,12 @@
 
 {% block content %}
 <p>What band are you into right now?</p>
-<form action="">
-    <input type="text">
-    <input type="submit">
+<form action="{{ url_for('related_artists') }}" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.search_term.label }}<br>
+        {{ form.search_term(size=128) }}
+    </p>
+    <p>{{ form.submit() }}</p>
 </form>
 {% endblock %}
