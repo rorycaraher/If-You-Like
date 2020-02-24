@@ -15,9 +15,10 @@ def index():
     
 @app.route('/related-artists', methods=['GET', 'POST'])
 def related_artists():
+    form = ArtistSearchForm()
     search_term = request.form['search_term']
-    results = ifyoulike.get_related_artists(search_term)
-    return render_template('related-artists.html', results = results)
+    artists = ifyoulike.get_related_artists(search_term)['artists']
+    return render_template('related-artists.html', search_term = search_term, artists = artists, form = form)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=os.environ.get('PORT', 3000), debug=True)

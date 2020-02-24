@@ -1,7 +1,23 @@
 {% extends 'wrapper.html' %}
 
 {% block content %}
+<h2>So you like {{ search_term }} eh?</h2>
+<p>Check out these bands too!</p>
+<ul>
+    {% for artist in artists %}
+        <li>
+            {{ artist.name }}
+        </li>
+    {% endfor %}
+</ul>
 
-{{results}}
+<form action="{{ url_for('related_artists') }}" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.search_term.label }}<br>
+        {{ form.search_term(size=128) }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
 
 {% endblock %}
