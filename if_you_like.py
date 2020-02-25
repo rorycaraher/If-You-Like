@@ -14,10 +14,19 @@ class IfYouLike:
         self.sp = spotipy.Spotify(auth=self.token)
 
     def get_related_artists(self, search_term):
-        # TODO: get the search term from the search results, not just the input string 
         results = self.sp.search(q=search_term,type='artist', limit=1)
+        searched_artist = results['artists']['items'][0]['name']
         artist_id = results['artists']['items'][0]['id']
-        return  self.sp.artist_related_artists(artist_id)
+        return  {
+            'searched_artist': searched_artist,
+            'artist_id': artist_id,
+            'artists': self.sp.artist_related_artists(artist_id)['artists']
+        }
+
+    def get_artist_albums(self, artist_id):
+        results = self.sp.artist_albums(artist_id)
+        albums = results['items']
+        return albums
 
     # this will fail if artist only has EPs
     def get_album_tracks(self, search_term):
@@ -43,8 +52,3 @@ class IfYouLike:
         # playlist = self.sp.user_playlist_create(secrets.user_id, playlist_title, public=True)
         # add_tracks = self.sp.user_playlist_add_tracks(secrets.username, playlist['id'], track_ids)
         # return add_tracks
-
-
-# ifyoulike = IfYouLike()
-# print(ifyoulike.create_playlist(sys.argv[1]))
-# print(ifyoulike.get_album_tracks(sys.argv[1]))

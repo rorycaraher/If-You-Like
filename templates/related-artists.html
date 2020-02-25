@@ -1,12 +1,12 @@
 {% extends 'wrapper.html' %}
 
 {% block content %}
-<h2>So you like {{ search_term }} eh?</h2>
+<h2>So you like {{ searched_artist }} eh?</h2>
 <p>Check out these bands too!</p>
 <ul>
     {% for artist in artists %}
         <li>
-            <a href="{{ artist.external_urls.spotify }}" target="_blank">
+            <a href="/artist-albums?artist_id={{ artist_id }}" target="_blank">
                 {{ artist.name }}
             </a>
         </li>
